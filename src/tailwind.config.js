@@ -12,6 +12,7 @@ module.exports = {
         royalBlue: colors.royalBlue,
         dimGray: colors.dimGray,
         blackPearl: colors.blackPearl,
+        lynxWhite: colors.lynxWhite,
       },
       fontFamily: {
         noto: ['Noto Sans JP', 'system-ui', 'sans-serif'],

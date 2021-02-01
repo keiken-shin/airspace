@@ -6,5 +6,6 @@ module.exports = {
     royalBlue: '#4460F1',
     dimGray: '#666666',
     blackPearl: '#061936',
+    lynxWhite: '#f7f7f7',
   },
 };

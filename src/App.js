@@ -1,9 +1,16 @@
 import React from 'react';
+import GlobalStyle from './assets/styles/global';
+
+import { LayoutOne } from './components';
+import { Register } from './pages';
 
 const App = () => (
-  <div>
-    <h1>Hello, World!</h1>
-  </div>
+  <section>
+    <GlobalStyle />
+    <LayoutOne>
+      <Register />
+    </LayoutOne>
+  </section>
 );
 
 export default App;

@@ -13,8 +13,28 @@ module.exports = {
   },
   plugins: ['react', 'prettier'],
   rules: {
-    'react/jsx-filename-extension': 'off',
-    'prettier/prettier': ['error'],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'react/no-unescaped-entities': [
+      'error',
+      {
+        forbid: ['>', '}'],
+      },
+    ],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', 'jsx'],
+      },
+    ],
+    'no-console': 'off',
+    'import/prefer-default-export': 'off',
     quotes: [2, 'single', { avoidEscape: true }],
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/label-has-for': 'off',
   },
 };
