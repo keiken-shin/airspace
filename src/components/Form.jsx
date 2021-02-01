@@ -62,4 +62,15 @@ const StyledAuth = styled.div`
   }
 `;
 
-export { Heading, StyledForm, StyledButton, StyledAuth };
+const StyledAlert = styled.div`
+  ${tw`w-full text-red-500 rounded-xl mb-8 flex items-center gap-x-4`}
+
+  & {
+    .badge svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+export { Heading, StyledForm, StyledButton, StyledAuth, StyledAlert };

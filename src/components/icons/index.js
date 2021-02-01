@@ -1,3 +1,4 @@
+export { default as Error } from './error';
 export { default as Google } from './google';
 export { default as Logo } from './logo';
 export { default as PassEye } from './pass-eye';

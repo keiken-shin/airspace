@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { PassEye, PassEyeClose } from './icons';
 
 const StyledInput = styled.div`
@@ -23,14 +23,18 @@ const StyledInput = styled.div`
     ${tw`text-sm`}
   }
 
+  input:not(:placeholder-shown) ~ .eye {
+    ${tw`block`}
+  }
+
   .eye {
     width: 24px;
     height: 24px;
-    ${tw`absolute bg-transparent border-0 text-dimGray top-1/2 right-4 transform -translate-y-1/2 cursor-pointer z-10 outline-none`}
+    ${tw`hidden absolute bg-transparent border-0 text-dimGray top-1/2 right-4 transform -translate-y-1/2 cursor-pointer z-10 outline-none`}
   }
 `;
 
-const Input = ({ label, type }) => {
+const Input = ({ label, type, name, reference }) => {
   const [passType] = useState(type === 'password');
   const [passwordShown, setPasswordShown] = useState({
     passEye: false,
@@ -56,6 +60,8 @@ const Input = ({ label, type }) => {
       <input
         type={passType ? passwordShown.passText : type}
         placeholder=" "
+        name={name}
+        ref={reference}
         required
       />
       <span className="label-placeholder">{label}</span>
@@ -71,11 +77,18 @@ const Input = ({ label, type }) => {
 
 Input.defaultProps = {
   type: 'text',
+  name: '',
+  reference: null,
 };
 
 Input.propTypes = {
-  label: Proptypes.string.isRequired,
-  type: Proptypes.string,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  reference: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.elementType }),
+  ]),
 };
 
 export default Input;
