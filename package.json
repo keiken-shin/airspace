@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "firebase": "^8.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
@@ -17,7 +18,7 @@
     "build:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/styles.css",
     "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/styles.css",
     "start": "npm run watch:css & react-scripts start",
-    "build": "npm run build:css react-scripts build",
+    "build": "npm run build:css & react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
