@@ -15,6 +15,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     'prettier/prettier': ['error'],
-    quotes: [2, 'single', 'auto-escape'],
+    quotes: [2, 'single', { avoidEscape: true }],
   },
 };
