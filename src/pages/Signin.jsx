@@ -27,22 +27,11 @@ const Signin = () => {
     try {
       setError('');
       setLoading(true);
-      await login(email.current.value, password.current.value);
-      history.push('/'); // On successfull login redirect to homepage
-    } catch {
-      setError('Failed to sign in');
-    }
-
-    return setLoading(false);
-  };
-
-  const handleGoogleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      setError('');
-      setLoading(true);
-      await signInWithGoogle();
+      if (e.target.tagName === 'FORM') {
+        await login(email.current.value, password.current.value);
+      } else {
+        await signInWithGoogle();
+      }
       history.push('/'); // On successfull login redirect to homepage
     } catch {
       setError('Failed to sign in');
@@ -98,7 +87,7 @@ const Signin = () => {
       </StyledForm>
 
       <StyledAuth>
-        <button type="button" className="btn-auth" onClick={handleGoogleSubmit}>
+        <button type="button" className="btn-auth" onClick={handleSubmit}>
           <Google />
           Sign in with Google
         </button>

@@ -42,11 +42,12 @@ const StyledForm = styled.form`
 `;
 
 const StyledButton = styled.button`
-  ${tw`w-full h-16 grid place-items-center bg-royalBlue text-lynxWhite text-lg font-medium rounded-xl outline-none transform transition-all`}
+  ${tw`w-full h-16 grid place-items-center bg-royalBlue outline-none text-lynxWhite text-lg font-medium rounded-xl outline-none transform transition-all`}
   box-shadow: 0 10px 20px -10px rgba(68, 96, 241, 0.5);
 
   &:hover,
   &:focus {
+    outline: none;
     box-shadow: 0 20px 20px -10px rgba(68, 96, 241, 0.5);
     transform: translateY(-5px);
   }

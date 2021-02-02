@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -85,10 +86,7 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string,
   name: PropTypes.string,
-  reference: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({ current: PropTypes.elementType }),
-  ]),
+  reference: PropTypes.any,
 };
 
 export default Input;

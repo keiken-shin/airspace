@@ -2,6 +2,18 @@ import { createGlobalStyle } from 'styled-components';
 import tw from 'twin.macro';
 
 const GlobalStyle = createGlobalStyle`
+	:root{
+		--transparent: transparent;
+		--whiteSmoke: #ECECEC;
+		--silver: #ACACAC;
+		--dodgerBlue: #0066ff;
+		--royalBlue: #4460F1;
+		--dimGray: #666666;
+		--blackPearl: #061936;
+		--lynxWhite: #f7f7f7;
+		--midGray: #ccc;
+	}
+
 	*,
 	*:before,
 	*:after {

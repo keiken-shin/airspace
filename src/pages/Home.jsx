@@ -1,43 +1,23 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { StyledAlert } from '../components';
-import { Error } from '../components/icons';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Header } from '../components';
 import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
-  const [error, setError] = useState('');
-  const { currentUser, logout } = useAuth();
-  const history = useHistory();
-
-  const handleLogout = async () => {
-    setError('');
-    try {
-      await logout();
-      history.push('/login'); // On successful logout redirect to login page
-    } catch {
-      setError('Failed to logout');
-    }
-  };
+  const { currentUser } = useAuth();
 
   return (
-    <div>
-      <h1>Home</h1>
-      {error && (
-        <StyledAlert>
-          <span className="badge">
-            <Error />
-          </span>
-          <span>{error}</span>
-        </StyledAlert>
-      )}
-      <p>Email: {currentUser.email}</p>
-      <p>
-        <Link to="/edit-profile">Edit Profile</Link>
-      </p>
-      <button type="button" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
+    <>
+      <Header />
+      <main>
+        <h1>Home</h1>
+        <p>Email: {currentUser.email}</p>
+        <img src={currentUser.photoURL} alt="profile-pic" />
+        <div>
+          <Link to="/edit-profile">Edit Profile</Link>
+        </div>
+      </main>
+    </>
   );
 };
 
