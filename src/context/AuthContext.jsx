@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { auth } from '../api/firebase';
+import { auth, googleProvider } from '../api/firebase';
 
 const AuthContext = createContext();
 
@@ -24,6 +24,9 @@ const AuthProvider = ({ children }) => {
   // Reset Password
   const resetPassword = (email) => auth.sendPasswordResetEmail(email);
 
+  // Google Auth
+  const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -39,6 +42,7 @@ const AuthProvider = ({ children }) => {
     login,
     logout,
     resetPassword,
+    signInWithGoogle,
   };
 
   return (

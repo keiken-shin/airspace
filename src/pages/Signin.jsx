@@ -16,7 +16,7 @@ import { useAuth } from '../context/AuthContext';
 const Signin = () => {
   const email = useRef(null);
   const password = useRef(null);
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -28,6 +28,21 @@ const Signin = () => {
       setError('');
       setLoading(true);
       await login(email.current.value, password.current.value);
+      history.push('/'); // On successfull login redirect to homepage
+    } catch {
+      setError('Failed to sign in');
+    }
+
+    return setLoading(false);
+  };
+
+  const handleGoogleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithGoogle();
       history.push('/'); // On successfull login redirect to homepage
     } catch {
       setError('Failed to sign in');
@@ -83,7 +98,7 @@ const Signin = () => {
       </StyledForm>
 
       <StyledAuth>
-        <button type="button" className="btn-auth">
+        <button type="button" className="btn-auth" onClick={handleGoogleSubmit}>
           <Google />
           Sign in with Google
         </button>
