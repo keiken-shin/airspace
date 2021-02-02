@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 const Heading = styled.div`
   ${tw`w-full px-4 mb-6 md:w-7/12 md:mb-12`}
   h2 {
-    ${tw`text-3xl md:text-5xl font-semibold md:w-2/3`}
+    ${tw`text-3xl md:text-5xl font-semibold`}
   }
 
   p {
@@ -63,7 +63,12 @@ const StyledAuth = styled.div`
 `;
 
 const StyledAlert = styled.div`
-  ${tw`w-full text-red-500 rounded-xl mb-8 flex items-center gap-x-4`}
+  ${tw`w-full rounded-xl mb-12 flex items-center gap-x-4 px-4 py-2 border border-solid`}
+
+  ${(props) =>
+    props.variant === 'error'
+      ? tw`text-red-500 border-red-500`
+      : tw`text-green-500 border-green-500`}
 
   & {
     .badge svg {

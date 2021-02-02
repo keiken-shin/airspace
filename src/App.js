@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import GlobalStyle from './assets/styles/global';
 
-import { LayoutOne, PrivateRoute } from './components';
+import { PrivateRoute } from './components';
 import { AuthProvider } from './context/AuthContext';
-import { Register, Home, Signin } from './pages';
+import { EditProfile, ForgotPassword, Home, Register, Signin } from './pages';
 
 const App = () => (
   <BrowserRouter>
@@ -12,10 +12,10 @@ const App = () => (
       <GlobalStyle />
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
-        <LayoutOne>
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Signin} />
-        </LayoutOne>
+        <PrivateRoute path="/edit-profile" component={EditProfile} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Signin} />
+        <Route path="/forgot-password" component={ForgotPassword} />
       </Switch>
     </AuthProvider>
   </BrowserRouter>

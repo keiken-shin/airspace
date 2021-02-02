@@ -8,6 +8,7 @@ import {
   StyledAuth,
   StyledAlert,
   Input,
+  LayoutOne,
 } from '../components';
 import { Error, Google } from '../components/icons';
 import { useAuth } from '../context/AuthContext';
@@ -41,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <LayoutOne>
       <Heading>
         <h2>Register</h2>
         <p>
@@ -50,7 +51,7 @@ const Register = () => {
       </Heading>
       <StyledForm method="POST" onSubmit={handleSubmit}>
         {error && (
-          <StyledAlert>
+          <StyledAlert variant="error">
             <span className="badge">
               <Error />
             </span>
@@ -58,26 +59,32 @@ const Register = () => {
           </StyledAlert>
         )}
 
-        <Input
-          label="Enter email address"
-          type="email"
-          name="email"
-          reference={email}
-        />
+        <div className="mb-8">
+          <Input
+            label="Enter email address"
+            type="email"
+            name="email"
+            reference={email}
+          />
+        </div>
 
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          reference={password}
-        />
+        <div className="mb-8">
+          <Input
+            label="Password"
+            type="password"
+            name="password"
+            reference={password}
+          />
+        </div>
 
-        <Input
-          label="Confirm Password"
-          type="password"
-          name="password-confirmation"
-          reference={passwordConfirmation}
-        />
+        <div className="mb-8">
+          <Input
+            label="Confirm Password"
+            type="password"
+            name="password-confirmation"
+            reference={passwordConfirmation}
+          />
+        </div>
 
         <StyledButton disabled={loading}>Register</StyledButton>
 
@@ -90,7 +97,7 @@ const Register = () => {
           Sign up with Google
         </button>
       </StyledAuth>
-    </>
+    </LayoutOne>
   );
 };
 

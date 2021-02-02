@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { PassEye, PassEyeClose } from './icons';
 
 const StyledInput = styled.div`
-  ${tw`flex bg-whiteSmoke h-16 relative w-full rounded-xl mb-8`}
+  ${tw`flex bg-whiteSmoke h-16 relative w-full rounded-xl`}
 
   input {
     ${tw`bg-transparent z-10 w-full rounded-xl px-4 outline-none transform transition-all h-full`}
@@ -56,7 +56,7 @@ const Input = ({ label, type, name, reference }) => {
   };
 
   return (
-    <StyledInput>
+    <StyledInput className="styled-input">
       <input
         type={passType ? passwordShown.passText : type}
         placeholder=" "

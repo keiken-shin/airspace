@@ -8,6 +8,7 @@ import {
   StyledAuth,
   StyledAlert,
   Input,
+  LayoutOne,
 } from '../components';
 import { Google, Error } from '../components/icons';
 import { useAuth } from '../context/AuthContext';
@@ -36,7 +37,7 @@ const Signin = () => {
   };
 
   return (
-    <>
+    <LayoutOne>
       <Heading>
         <h2>Signin</h2>
         <p>
@@ -46,26 +47,35 @@ const Signin = () => {
 
       <StyledForm method="POST" onSubmit={handleSubmit}>
         {error && (
-          <StyledAlert>
+          <StyledAlert variant="error">
             <span className="badge">
               <Error />
             </span>
             <span>{error}</span>
           </StyledAlert>
         )}
-        <Input
-          label="Enter email address"
-          type="email"
-          name="email"
-          reference={email}
-        />
 
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          reference={password}
-        />
+        <div className="mb-8">
+          <Input
+            label="Enter email address"
+            type="email"
+            name="email"
+            reference={email}
+          />
+        </div>
+
+        <div className="mb-8">
+          <Input
+            label="Password"
+            type="password"
+            name="password"
+            reference={password}
+          />
+
+          <div className="flex items-center justify-end text-dodgerBlue mt-2">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </div>
+        </div>
 
         <StyledButton disabled={loading}>Login</StyledButton>
 
@@ -78,7 +88,7 @@ const Signin = () => {
           Sign in with Google
         </button>
       </StyledAuth>
-    </>
+    </LayoutOne>
   );
 };
 
