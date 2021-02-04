@@ -12,6 +12,9 @@ const App = () => (
       <GlobalStyle />
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/folder/:folderId" component={Home} />
+
+        {/* Authentication */}
         <PrivateRoute path="/edit-profile" component={EditProfile} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Signin} />

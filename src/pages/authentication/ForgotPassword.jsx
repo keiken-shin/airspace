@@ -8,9 +8,9 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
-} from '../components';
-import { Error } from '../components/icons';
-import { useAuth } from '../context/AuthContext';
+} from '../../components';
+import { Error } from '../../components/icons';
+import { useAuth } from '../../context/AuthContext';
 
 const ForgotPassword = () => {
   const email = useRef(null);

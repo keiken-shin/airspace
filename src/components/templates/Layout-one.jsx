@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import Proptypes from 'prop-types';
 
-import hero from '../assets/images/hero-3d.png';
-import { Logo } from './icons';
+import hero from '../../assets/images/hero-3d.png';
+import { Logo } from '../icons';
 
 const StyledLayoutOne = styled.div`
   ${tw`w-full min-h-screen`}

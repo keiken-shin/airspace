@@ -9,9 +9,9 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
-} from '../components';
-import { Error, Google } from '../components/icons';
-import { useAuth } from '../context/AuthContext';
+} from '../../components';
+import { Error, Google } from '../../components/icons';
+import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const email = useRef(null);

@@ -7,5 +7,6 @@ module.exports = {
     dimGray: '#666666',
     blackPearl: '#061936',
     lynxWhite: '#f7f7f7',
+    midGray: '#cccccc',
   },
 };

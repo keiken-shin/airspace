@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import PropTypes from 'prop-types';
-import { PassEye, PassEyeClose } from './icons';
+
+import { PassEye, PassEyeClose } from '../icons';
 
 const StyledInput = styled.div`
   ${tw`flex bg-whiteSmoke h-16 relative w-full rounded-xl`}
@@ -35,7 +36,7 @@ const StyledInput = styled.div`
   }
 `;
 
-const Input = ({ label, type, name, reference }) => {
+const Input = ({ label, type, name, placeholder, required, reference }) => {
   const [passType] = useState(type === 'password');
   const [passwordShown, setPasswordShown] = useState({
     passEye: false,
@@ -60,10 +61,11 @@ const Input = ({ label, type, name, reference }) => {
     <StyledInput className="styled-input">
       <input
         type={passType ? passwordShown.passText : type}
-        placeholder=" "
+        placeholder={placeholder}
         name={name}
         ref={reference}
-        required
+        autoComplete={passType ? 'off' : 'on'}
+        required={required}
       />
       <span className="label-placeholder">{label}</span>
 
@@ -77,16 +79,21 @@ const Input = ({ label, type, name, reference }) => {
 };
 
 Input.defaultProps = {
+  label: '',
   type: 'text',
   name: '',
+  placeholder: ' ',
   reference: null,
+  required: true,
 };
 
 Input.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
+  placeholder: PropTypes.string,
   reference: PropTypes.any,
+  required: PropTypes.bool,
 };
 
 export default Input;

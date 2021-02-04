@@ -4,8 +4,10 @@ export {
   StyledButton,
   StyledAuth,
   StyledAlert,
-} from './Form';
+} from './templates/Form';
+export { default as Input } from './templates/Input';
+export { default as LayoutOne } from './templates/Layout-one';
+
 export { default as Header } from './Header';
-export { default as Input } from './Input';
-export { default as LayoutOne } from './Layout-one';
+export { default as AddFolder } from './AddFolder';
 export { default as PrivateRoute } from './PrivateRoute';

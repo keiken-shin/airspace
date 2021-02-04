@@ -1,5 +1,5 @@
-export { default as EditProfile } from './EditProfile';
-export { default as ForgotPassword } from './ForgotPassword';
+export { default as EditProfile } from './authentication/EditProfile';
+export { default as ForgotPassword } from './authentication/ForgotPassword';
 export { default as Home } from './Home';
-export { default as Register } from './Register';
-export { default as Signin } from './Signin';
+export { default as Register } from './authentication/Register';
+export { default as Signin } from './authentication/Signin';

@@ -12,6 +12,14 @@ const GlobalStyle = createGlobalStyle`
 		--blackPearl: #061936;
 		--lynxWhite: #f7f7f7;
 		--midGray: #ccc;
+
+		--box-shadow-sm: 0 10px 20px -10px rgba(68, 96, 241, 0.5);
+		--box-shadow-lg: 0 20px 20px -10px rgba(68, 96, 241, 0.5); 
+
+		--svg-width: 24px;
+		--svg-height: 24px;
+
+		--folder-max-width: 250px;
 	}
 
 	*,
@@ -30,8 +38,28 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	body{
-    ${tw`bg-lynxWhite m-0 p-0 text-blackPearl font-noto w-full min-h-full`}
-  }
+		${tw`bg-lynxWhite m-0 p-0 text-blackPearl font-noto w-full min-h-full`}
+	}
+
+	.primary{
+		${tw`px-6 py-2 rounded-lg bg-dodgerBlue text-lynxWhite transition transition-all flex items-center gap-x-2`}
+		box-shadow: var(--box-shadow-sm);
+
+		&{
+			:hover,
+			:focus {
+			  outline: none;
+			  box-shadow: var(--box-shadow-lg);
+			  transform: translateY(-5px);
+			}
+
+			svg{
+				width: var(--svg-width);
+				height: var(--svg-height);
+			}
+
+		}
+	}
 `;
 
 export default GlobalStyle;
