@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 import { useParams, useLocation } from 'react-router-dom';
 
-import { AddFolder, BreadCrumbs, Folder, Header } from '../components';
+import {
+  AddFile,
+  AddFolder,
+  BreadCrumbs,
+  Folder,
+  File,
+  Header,
+} from '../components';
 import { useFolder } from '../hooks/useFolder';
 
 const StyledContainer = styled.main`
@@ -18,13 +25,17 @@ const StyledContainer = styled.main`
       }
 
       .control-buttons {
-        ${tw`flex items-center`}
+        ${tw`flex items-center gap-x-4`}
       }
+    }
+
+    .section-title {
+      ${tw`text-sm font-semibold capitalize text-dimGray px-4 my-4`}
     }
   }
 `;
 
-const StyledFolderList = styled.div`
+const StyledList = styled.div`
   ${tw`grid`}
   grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
 
@@ -46,7 +57,10 @@ const StyledFolderList = styled.div`
 const Home = () => {
   const { folderId } = useParams();
   const { state = {} } = useLocation();
-  const { folder, childFolders } = useFolder(folderId, state.folder);
+  const { folder, childFolders, childFiles } = useFolder(
+    folderId,
+    state.folder
+  );
 
   return (
     <>
@@ -57,17 +71,39 @@ const Home = () => {
             <BreadCrumbs currentFolder={folder} />
           </div>
           <div className="control-buttons">
+            <AddFile currentFolder={folder} />
             <AddFolder currentFolder={folder} />
           </div>
         </section>
+
         {childFolders.length > 0 && (
-          <StyledFolderList>
-            {childFolders.map((childFolder) => (
-              <div className="inner-list-div" key={childFolder.id}>
-                <Folder folder={childFolder} />
-              </div>
-            ))}
-          </StyledFolderList>
+          <section className="folders-section">
+            <h4 className="section-title">Folders</h4>
+            <StyledList>
+              {childFolders.map((childFolder) => (
+                <div className="inner-list-div" key={childFolder.id}>
+                  <Folder folder={childFolder} />
+                </div>
+              ))}
+            </StyledList>
+          </section>
+        )}
+
+        {childFolders.length > 0 && childFiles.length > 0 && (
+          <hr className="my-4" />
+        )}
+
+        {childFiles.length > 0 && (
+          <section className="files-section">
+            <h4 className="section-title">Files</h4>
+            <StyledList>
+              {childFiles.map((childFile) => (
+                <div className="inner-list-div" key={childFile.id}>
+                  <File file={childFile} />
+                </div>
+              ))}
+            </StyledList>
+          </section>
         )}
       </StyledContainer>
     </>

@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
-import { FolderIcon } from './icons';
-
-const StyledFolder = styled.div`
+const StyledFile = styled.div`
   ${tw`flex items-center border border-solid border-midGray rounded-lg text-dimGray`}
   max-width: var(--folder-max-width);
 
@@ -16,8 +13,11 @@ const StyledFolder = styled.div`
       ${tw`border-royalBlue bg-blue-100 text-royalBlue`}
     }
 
-    .folder-link {
+    .file-link {
       ${tw`w-full h-full flex items-center gap-x-2 px-4 py-2 cursor-default`}
+      .file-name {
+        ${tw`truncate`}
+      }
 
       svg {
         width: var(--svg-width);
@@ -29,22 +29,20 @@ const StyledFolder = styled.div`
   }
 `;
 
-const Folder = ({ folder }) => (
-  <StyledFolder key={folder.id}>
-    <Link
-      to={{ pathname: `/folder/${folder.id}`, state: { folder } }}
-      className="folder-link"
-    >
-      <FolderIcon />
-      <span className="truncate" title={folder.name}>
-        {folder.name}
-      </span>
-    </Link>
-  </StyledFolder>
+const File = ({ file }) => (
+  <StyledFile>
+    <a href={file.url} target="_blank" rel="noreferrer" className="file-link">
+      <span className="file-name">{file.name}</span>
+    </a>
+  </StyledFile>
 );
 
-Folder.propTypes = {
-  folder: PropTypes.instanceOf(Object).isRequired,
+File.defaultProps = {
+  file: null,
 };
 
-export default Folder;
+File.propTypes = {
+  file: PropTypes.instanceOf(Object),
+};
+
+export default File;
