@@ -26,7 +26,10 @@ const StyledFolder = styled.div`
 
 const Folder = ({ folder }) => (
   <StyledFolder key={folder.id}>
-    <Link to={`/folder/${folder.id}`} className="folder-link">
+    <Link
+      to={{ pathname: `/folder/${folder.id}`, state: { folder } }}
+      className="folder-link"
+    >
       <FolderIcon />
       <span className="truncate" title={folder.name}>
         {folder.name}

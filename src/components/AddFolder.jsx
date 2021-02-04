@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import { AddFolderIcon, Cross } from './icons';
 import Input from './templates/Input';
 import { database } from '../api/firebase';
+import { ROOT_FOLDER } from '../hooks/useFolder';
 
 const StyledModel = styled.div`
   ${tw`fixed inset-0 bg-gray-500 opacity-75 grid place-items-center z-20`}
@@ -77,12 +78,18 @@ function Model({ close, currentFolder }) {
 
     if (currentFolder === null) return;
 
+    // Calculate Path to current folder
+    const path = [...currentFolder.path];
+    if (currentFolder !== ROOT_FOLDER) {
+      path.push({ name: currentFolder.name, id: currentFolder.id });
+    }
+
     // Create folder in the database
     database.folders.add({
       name: folderName.current.value,
       parentId: currentFolder.id,
       userId: currentUser.uid,
-      //   path,
+      path,
       createdAt: database.getCurrentTimeStamp(),
     });
 

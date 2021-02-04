@@ -8,7 +8,7 @@ const ACTIONS = {
   SET_CHILD_FOLDERS: 'set-child-folders',
 };
 
-const ROOT_FOLDER = {
+export const ROOT_FOLDER = {
   name: 'Root',
   id: null,
   path: [],

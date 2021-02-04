@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
-import { AddFolder, Header } from '../components';
-import Folder from '../components/Folder';
+import { AddFolder, BreadCrumbs, Folder, Header } from '../components';
 import { useFolder } from '../hooks/useFolder';
 
 const StyledContainer = styled.main`
@@ -12,7 +11,11 @@ const StyledContainer = styled.main`
 
   & {
     .controls {
-      ${tw`flex items-center justify-end mb-4`}
+      ${tw`flex items-center justify-between mb-4`}
+
+      .breadcrumbs-menu {
+        ${tw`flex items-center`}
+      }
 
       .control-buttons {
         ${tw`flex items-center`}
@@ -42,14 +45,17 @@ const StyledFolderList = styled.div`
 
 const Home = () => {
   const { folderId } = useParams();
-  const { folder, childFolders } = useFolder(folderId);
-  console.log(folder, childFolders);
+  const { state = {} } = useLocation();
+  const { folder, childFolders } = useFolder(folderId, state.folder);
 
   return (
     <>
       <Header />
       <StyledContainer>
         <section className="controls">
+          <div className="breadcrumbs-menu">
+            <BreadCrumbs currentFolder={folder} />
+          </div>
           <div className="control-buttons">
             <AddFolder currentFolder={folder} />
           </div>
