@@ -46,11 +46,20 @@ const GlobalStyle = createGlobalStyle`
 		box-shadow: var(--box-shadow-sm);
 
 		&{
+			:disabled{
+				${tw`bg-blue-300 shadow-none`}
+			}
+
 			:hover,
 			:focus {
 			  outline: none;
 			  box-shadow: var(--box-shadow-lg);
 			  transform: translateY(-5px);
+
+			  :disabled{
+				  ${tw`shadow-none`}
+				  transform: none;
+			  }
 			}
 
 			svg{

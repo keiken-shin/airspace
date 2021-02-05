@@ -22,6 +22,10 @@ const StyledHeader = styled.header`
           box-shadow: 0 0 0 3px var(--lynxWhite);
           transition: box-shadow 0.25s ease-in-out;
 
+          img {
+            ${tw`min-w-full min-h-full object-cover`}
+          }
+
           :hover,
           :focus {
             box-shadow: 0 0 0 3px var(--midGray);
@@ -38,10 +42,12 @@ const StyledDropdown = styled.div`
   & {
     .profile-detail {
       ${tw`px-4 py-8 flex flex-col items-center justify-center`}
-      img {
-        width: 90px;
-        height: 90px;
-        ${tw`rounded-full`}
+      .profile-image {
+        ${tw`w-32 h-32 rounded-full overflow-hidden`}
+
+        img {
+          ${tw`min-w-full min-h-full object-cover`}
+        }
       }
 
       .profile-name {
@@ -124,10 +130,12 @@ function Dropdown({ closeDropdown }) {
       <div className="backdrop" role="presentation" onClick={closeDropdown} />
       <StyledDropdown>
         <div className="profile-detail">
-          <img
-            src={currentUser.photoURL ? currentUser.photoURL : Profile}
-            alt="Profile"
-          />
+          <div className="profile-image">
+            <img
+              src={currentUser.photoURL ? currentUser.photoURL : Profile}
+              alt="Profile"
+            />
+          </div>
           <p className="profile-name">
             Hi{' '}
             {currentUser.displayName ? currentUser.displayName : 'Mysterious'}!

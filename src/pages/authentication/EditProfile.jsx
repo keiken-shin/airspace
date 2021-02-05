@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 import { useAuth } from '../../context/AuthContext';
-import { Header } from '../../components';
+import { Header, StyledAlert } from '../../components';
 import Profile from '../../assets/images/profile.jpg';
+import { Error } from '../../components/icons';
+import { storage } from '../../api/firebase';
 
 const StyledMain = styled.main`
   ${tw`px-4 py-8 md:mx-auto md:px-12`}
@@ -39,6 +41,10 @@ const StyledMain = styled.main`
 
               .image {
                 ${tw`w-16 h-16 rounded-full bg-gray-500 overflow-hidden`}
+
+                img {
+                  ${tw`min-w-full min-h-full object-cover`}
+                }
               }
 
               .custom-label {
@@ -80,11 +86,21 @@ const StyledMain = styled.main`
         }
       }
     }
+
+    .alert-message {
+      ${tw`absolute bottom-4 right-8`}
+    }
   }
 `;
 
 const EditProfile = () => {
-  const { currentUser } = useAuth();
+  const {
+    currentUser,
+    updateEmail,
+    updatePassword,
+    updateName,
+    updatePhoto,
+  } = useAuth();
   const [profile, setProfile] = useState(
     currentUser.photoURL ? currentUser.photoURL : Profile
   );
@@ -95,6 +111,9 @@ const EditProfile = () => {
     confirmPassword: '',
     picture: null,
   });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     if (e.target.name === 'picture') {
@@ -104,7 +123,6 @@ const EditProfile = () => {
       });
 
       setProfile(URL.createObjectURL(e.target.files[0]));
-      setTimeout(() => console.log(profile), 400);
     } else {
       setState({
         ...state,
@@ -113,10 +131,90 @@ const EditProfile = () => {
     }
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setLoading(true);
+    setSuccess('');
+    setError('');
+
+    if (state.password !== state.confirmPassword) {
+      return setError('Password does not match');
+    }
+
+    const promises = [];
+
+    if (state.picture) {
+      const uploadTask = storage
+        .ref(`/users/${currentUser.uid}/${state.picture.name}`)
+        .put(state.picture);
+
+      uploadTask.on(
+        'state-changed',
+        (snapshot) => {
+          console.log(snapshot);
+        },
+        () => {
+          setError('Oops! Something went wrong');
+          setLoading(false);
+          return 0;
+        },
+        () => {
+          uploadTask.snapshot.ref
+            .getDownloadURL()
+            .then((url) => promises.push(updatePhoto(url)));
+        }
+      );
+    }
+
+    if (state.name !== 'Mysterious' && state.name !== '') {
+      promises.push(updateName(state.name));
+    }
+
+    if (state.email !== currentUser.email) {
+      promises.push(updateEmail(state.email));
+    }
+
+    if (state.password !== '') {
+      promises.push(updatePassword(state.password));
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        setSuccess('Profile updated successfully');
+      })
+      .catch(() => {
+        setError('Failed to update account');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    return setTimeout(() => {
+      setError('');
+      setSuccess('');
+    }, 5000);
+  }
+
   return (
     <>
       <Header />
       <StyledMain>
+        {error && (
+          <StyledAlert variant="error">
+            <span className="badge">
+              <Error />
+            </span>
+            <span>{error}</span>
+          </StyledAlert>
+        )}
+
+        {success && (
+          <StyledAlert variant="success">
+            <span>{success}</span>
+          </StyledAlert>
+        )}
+
         <div className="wrapper">
           <section className="wrapper-label">
             <h1 className="wrapper-label-title">Edit profile</h1>
@@ -126,7 +224,7 @@ const EditProfile = () => {
           </section>
 
           <section className="wrapper-content">
-            <form className="wrapper-content-form">
+            <form className="wrapper-content-form" onSubmit={handleSubmit}>
               <div className="profile-section">
                 <div className="profile-section-label">
                   <div className="image">
@@ -181,10 +279,11 @@ const EditProfile = () => {
                     type="password"
                     className="custom-input"
                     name="password"
+                    autoComplete="off"
                     value={state.password}
                     onChange={handleChange}
                   />
-                  <p className="note">
+                  <div className="note">
                     <ul className="note-details">
                       <li>
                         Leaving password field empty means password remains the
@@ -192,7 +291,7 @@ const EditProfile = () => {
                       </li>
                       <li>Also, password length must be greater than 6</li>
                     </ul>
-                  </p>
+                  </div>
                 </div>
               </div>
 
@@ -206,10 +305,15 @@ const EditProfile = () => {
                     className="custom-input"
                     name="confirmPassword"
                     value={state.confirmPassword}
+                    autoComplete="off"
                     onChange={handleChange}
                   />
 
-                  <button type="submit" className="primary my-6">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="primary my-6"
+                  >
                     Save
                   </button>
                 </div>

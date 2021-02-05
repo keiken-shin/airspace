@@ -27,6 +27,17 @@ const AuthProvider = ({ children }) => {
   // Google Auth
   const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
+  // Update Profile
+  const updateEmail = (email) => currentUser.updateEmail(email);
+
+  const updatePassword = (password) => currentUser.updatePassword(password);
+
+  const updateName = (displayName) =>
+    currentUser.updateProfile({ displayName });
+
+  const updatePhoto = (profile) =>
+    currentUser.updateProfile({ photoURL: profile });
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -43,6 +54,10 @@ const AuthProvider = ({ children }) => {
     logout,
     resetPassword,
     signInWithGoogle,
+    updateEmail,
+    updatePassword,
+    updateName,
+    updatePhoto,
   };
 
   return (
