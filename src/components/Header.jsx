@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -11,7 +12,7 @@ const StyledHeader = styled.header`
 
   & {
     .logo-title {
-      ${tw`font-noto font-black text-xl`}
+      ${tw`font-noto font-black text-xl select-none`}
     }
     nav {
       ${tw`flex items-center`}
@@ -32,7 +33,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledDropdown = styled.div`
-  ${tw`flex flex-col absolute top-16 right-12 bg-lynxWhite border border-solid border-silver rounded-lg shadow-md`}
+  ${tw`flex flex-col absolute top-16 right-12 bg-lynxWhite border border-solid border-gray-200 rounded-lg shadow-lg z-50`}
   width: 300px;
   & {
     .profile-detail {
@@ -53,7 +54,7 @@ const StyledDropdown = styled.div`
     }
 
     .dropdown-item {
-      ${tw`text-center border-t border-solid border-silver`}
+      ${tw`text-center border-t border-solid border-gray-200`}
 
       a,button {
         ${tw`w-full block py-4 transform transition-all outline-none`}
@@ -70,10 +71,16 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const { currentUser } = useAuth();
 
+  const closeDropdown = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <StyledHeader>
-        <h4 className="logo-title">AIRSPACE.</h4>
+        <Link to="/" className="logo-title">
+          AIRSPACE.
+        </Link>
 
         <nav>
           <div className="profile">
@@ -88,7 +95,7 @@ const Header = () => {
                 className="profile-img"
               />
             </div>
-            {open && <Dropdown />}
+            {open && <Dropdown closeDropdown={() => closeDropdown(this)} />}
           </div>
         </nav>
       </StyledHeader>
@@ -96,7 +103,7 @@ const Header = () => {
   );
 };
 
-function Dropdown() {
+function Dropdown({ closeDropdown }) {
   const [error, setError] = useState('');
   const history = useHistory();
   const { currentUser, logout } = useAuth();
@@ -113,29 +120,37 @@ function Dropdown() {
   }
 
   return (
-    <StyledDropdown>
-      <div className="profile-detail">
-        <img
-          src={currentUser.photoURL ? currentUser.photoURL : Profile}
-          alt="Profile"
-        />
-        <p className="profile-name">
-          Hi {currentUser.displayName ? currentUser.displayName : 'Mysterious'}!
-        </p>
-        <p className="profile-email">{currentUser.email}</p>
-      </div>
+    <>
+      <div className="backdrop" role="presentation" onClick={closeDropdown} />
+      <StyledDropdown>
+        <div className="profile-detail">
+          <img
+            src={currentUser.photoURL ? currentUser.photoURL : Profile}
+            alt="Profile"
+          />
+          <p className="profile-name">
+            Hi{' '}
+            {currentUser.displayName ? currentUser.displayName : 'Mysterious'}!
+          </p>
+          <p className="profile-email">{currentUser.email}</p>
+        </div>
 
-      <div className="dropdown-item edit-profile">
-        <Link to="/edit-profile">Edit Profile</Link>
-      </div>
+        <div className="dropdown-item edit-profile">
+          <Link to="/edit-profile">Edit Profile</Link>
+        </div>
 
-      <div className="dropdown-item logout">
-        <button type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
-    </StyledDropdown>
+        <div className="dropdown-item logout">
+          <button type="button" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      </StyledDropdown>
+    </>
   );
 }
+
+Dropdown.propTypes = {
+  closeDropdown: PropTypes.func.isRequired,
+};
 
 export default Header;

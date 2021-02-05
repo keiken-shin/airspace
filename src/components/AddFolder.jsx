@@ -10,11 +10,16 @@ import { database } from '../api/firebase';
 import { ROOT_FOLDER } from '../hooks/useFolder';
 
 const StyledModel = styled.div`
-  ${tw`fixed inset-0 bg-gray-500 opacity-75 grid place-items-center z-20`}
+  ${tw`fixed inset-0 grid place-items-center z-50`}
+
+  &:before {
+    content: '';
+    ${tw`block w-full h-full absolute inset-0 bg-gray-500 opacity-75`}
+  }
 `;
 
 const StyledModelCard = styled.div`
-  ${tw`inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full`}
+  ${tw`z-50 inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full`}
 
   & {
     .card-content {

@@ -60,6 +60,10 @@ const GlobalStyle = createGlobalStyle`
 
 		}
 	}
+
+	.backdrop{
+		${tw`absolute inset-0 z-40 w-full h-full`}
+	}
 `;
 
 export default GlobalStyle;

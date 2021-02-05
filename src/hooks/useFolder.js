@@ -94,7 +94,7 @@ export function useFolder(folderId = null, folder = null) {
       database.folders
         .where('parentId', '==', folderId)
         .where('userId', '==', currentUser.uid)
-        .orderBy('createdAt')
+        .orderBy('name')
         .onSnapshot((snapshot) => {
           dispatch({
             type: ACTIONS.SET_CHILD_FOLDERS,
@@ -109,7 +109,7 @@ export function useFolder(folderId = null, folder = null) {
       database.files
         .where('folderId', '==', folderId)
         .where('userId', '==', currentUser.uid)
-        .orderBy('createdAt')
+        .orderBy('name')
         .onSnapshot((snapshot) => {
           dispatch({
             type: ACTIONS.SET_CHILD_FILES,
