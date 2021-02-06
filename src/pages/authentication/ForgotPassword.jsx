@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import {
@@ -38,42 +39,45 @@ const ForgotPassword = () => {
   };
 
   return (
-    <LayoutOne>
-      <Heading>
-        <h2>Reset Password</h2>
-        <p>
-          Go back to <Link to="/login">Sign in</Link>
-        </p>
-      </Heading>
+    <>
+      <Helmet title="Reset Password - Airspace" />
+      <LayoutOne>
+        <Heading>
+          <h2>Reset Password</h2>
+          <p>
+            Go back to <Link to="/login">Sign in</Link>
+          </p>
+        </Heading>
 
-      <StyledForm method="POST" onSubmit={handleSubmit}>
-        {error && (
-          <StyledAlert variant="error">
-            <span className="badge">
-              <Error />
-            </span>
-            <span>{error}</span>
-          </StyledAlert>
-        )}
+        <StyledForm method="POST" onSubmit={handleSubmit}>
+          {error && (
+            <StyledAlert variant="error">
+              <span className="badge">
+                <Error />
+              </span>
+              <span>{error}</span>
+            </StyledAlert>
+          )}
 
-        {message && (
-          <StyledAlert variant="success">
-            <span>{message}</span>
-          </StyledAlert>
-        )}
+          {message && (
+            <StyledAlert variant="success">
+              <span>{message}</span>
+            </StyledAlert>
+          )}
 
-        <div className="mb-8">
-          <Input
-            label="Enter email address"
-            type="email"
-            name="email"
-            reference={email}
-          />
-        </div>
+          <div className="mb-8">
+            <Input
+              label="Enter email address"
+              type="email"
+              name="email"
+              reference={email}
+            />
+          </div>
 
-        <StyledButton disabled={loading}>Reset Password</StyledButton>
-      </StyledForm>
-    </LayoutOne>
+          <StyledButton disabled={loading}>Reset Password</StyledButton>
+        </StyledForm>
+      </LayoutOne>
+    </>
   );
 };
 

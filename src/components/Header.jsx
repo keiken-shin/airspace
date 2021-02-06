@@ -6,13 +6,18 @@ import tw from 'twin.macro';
 import { useAuth } from '../context/AuthContext';
 
 import Profile from '../assets/images/profile.jpg';
+import { Favicon } from './icons';
 
 const StyledHeader = styled.header`
   ${tw`h-16 flex items-center justify-between px-4 md:px-12 border-b border-solid border-silver`}
 
   & {
     .logo-title {
-      ${tw`font-noto font-black text-xl select-none`}
+      ${tw`flex items-center font-noto font-black text-xl select-none`}
+
+      svg {
+        height: 36px;
+      }
     }
     nav {
       ${tw`flex items-center`}
@@ -85,7 +90,8 @@ const Header = () => {
     <>
       <StyledHeader>
         <Link to="/" className="logo-title">
-          AIRSPACE.
+          <Favicon />
+          <span>AIRSPACE.</span>
         </Link>
 
         <nav>

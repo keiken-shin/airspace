@@ -13,6 +13,7 @@ export { default as Header } from './Header';
 
 export { default as AddFile } from './AddFile';
 export { default as AddFolder } from './AddFolder';
+export { default as BreadCrumbs } from './Breadcrumbs';
 export { default as Folder } from './Folder';
 export { default as File } from './File';
-export { default as BreadCrumbs } from './Breadcrumbs';
+export { default as SEO } from './SEO';

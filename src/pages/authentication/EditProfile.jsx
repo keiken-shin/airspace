@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
+import { Helmet } from 'react-helmet';
 
 import { useAuth } from '../../context/AuthContext';
 import { Header, StyledAlert } from '../../components';
@@ -198,6 +199,7 @@ const EditProfile = () => {
 
   return (
     <>
+      <Helmet title="Edit Profile" />
       <Header />
       <StyledMain>
         {error && (
@@ -235,7 +237,12 @@ const EditProfile = () => {
                   <h3 className="name">Mysterious</h3>
                   <label className="change-profile">
                     <span>Change profile picture</span>
-                    <input type="file" name="picture" onChange={handleChange} />
+                    <input
+                      type="file"
+                      name="picture"
+                      onChange={handleChange}
+                      accept=".jpg, .jpeg, .png"
+                    />
                   </label>
                 </div>
               </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { useParams, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import {
   AddFile,
@@ -64,6 +65,7 @@ const Home = () => {
 
   return (
     <>
+      <Helmet title={folderId ? folder.name : 'Airspace'} />
       <Header />
       <StyledContainer>
         <section className="controls">

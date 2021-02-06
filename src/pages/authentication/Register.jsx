@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 
 import {
@@ -60,62 +61,69 @@ const Register = () => {
   };
 
   return (
-    <LayoutOne>
-      <Heading>
-        <h2>Register</h2>
-        <p>
-          Already have an account? <Link to="/login">Sign in</Link>
-        </p>
-      </Heading>
-      <StyledForm method="POST" onSubmit={handleSubmit}>
-        {error && (
-          <StyledAlert variant="error">
-            <span className="badge">
-              <Error />
-            </span>
-            <span>{error}</span>
-          </StyledAlert>
-        )}
+    <>
+      <Helmet title="Register - Airspace" />
+      <LayoutOne>
+        <Heading>
+          <h2>Register</h2>
+          <p>
+            Already have an account? <Link to="/login">Sign in</Link>
+          </p>
+        </Heading>
+        <StyledForm method="POST" onSubmit={handleSubmit}>
+          {error && (
+            <StyledAlert variant="error">
+              <span className="badge">
+                <Error />
+              </span>
+              <span>{error}</span>
+            </StyledAlert>
+          )}
 
-        <div className="mb-8">
-          <Input
-            label="Enter email address"
-            type="email"
-            name="email"
-            reference={email}
-          />
-        </div>
+          <div className="mb-8">
+            <Input
+              label="Enter email address"
+              type="email"
+              name="email"
+              reference={email}
+            />
+          </div>
 
-        <div className="mb-8">
-          <Input
-            label="Password"
-            type="password"
-            name="password"
-            reference={password}
-          />
-        </div>
+          <div className="mb-8">
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              reference={password}
+            />
+          </div>
 
-        <div className="mb-8">
-          <Input
-            label="Confirm Password"
-            type="password"
-            name="password-confirmation"
-            reference={passwordConfirmation}
-          />
-        </div>
+          <div className="mb-8">
+            <Input
+              label="Confirm Password"
+              type="password"
+              name="password-confirmation"
+              reference={passwordConfirmation}
+            />
+          </div>
 
-        <StyledButton disabled={loading}>Register</StyledButton>
+          <StyledButton disabled={loading}>Register</StyledButton>
 
-        <div className="divider">or continue with</div>
-      </StyledForm>
+          <div className="divider">or continue with</div>
+        </StyledForm>
 
-      <StyledAuth>
-        <button type="button" className="btn-auth" onClick={handleGoogleSubmit}>
-          <Google />
-          Sign up with Google
-        </button>
-      </StyledAuth>
-    </LayoutOne>
+        <StyledAuth>
+          <button
+            type="button"
+            className="btn-auth"
+            onClick={handleGoogleSubmit}
+          >
+            <Google />
+            Sign up with Google
+          </button>
+        </StyledAuth>
+      </LayoutOne>
+    </>
   );
 };
 

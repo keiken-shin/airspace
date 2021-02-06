@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 
 import {
@@ -41,58 +42,61 @@ const Signin = () => {
   };
 
   return (
-    <LayoutOne>
-      <Heading>
-        <h2>Signin</h2>
-        <p>
-          New user? <Link to="/register">Create an Account</Link>
-        </p>
-      </Heading>
+    <>
+      <Helmet title="Signin - Airspace" />
+      <LayoutOne>
+        <Heading>
+          <h2>Signin</h2>
+          <p>
+            New user? <Link to="/register">Create an Account</Link>
+          </p>
+        </Heading>
 
-      <StyledForm method="POST" onSubmit={handleSubmit}>
-        {error && (
-          <StyledAlert variant="error">
-            <span className="badge">
-              <Error />
-            </span>
-            <span>{error}</span>
-          </StyledAlert>
-        )}
+        <StyledForm method="POST" onSubmit={handleSubmit}>
+          {error && (
+            <StyledAlert variant="error">
+              <span className="badge">
+                <Error />
+              </span>
+              <span>{error}</span>
+            </StyledAlert>
+          )}
 
-        <div className="mb-8">
-          <Input
-            label="Enter email address"
-            type="email"
-            name="email"
-            reference={email}
-          />
-        </div>
-
-        <div className="mb-8">
-          <Input
-            label="Password"
-            type="password"
-            name="password"
-            reference={password}
-          />
-
-          <div className="flex items-center justify-end text-dodgerBlue mt-2">
-            <Link to="/forgot-password">Forgot Password?</Link>
+          <div className="mb-8">
+            <Input
+              label="Enter email address"
+              type="email"
+              name="email"
+              reference={email}
+            />
           </div>
-        </div>
 
-        <StyledButton disabled={loading}>Login</StyledButton>
+          <div className="mb-8">
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              reference={password}
+            />
 
-        <div className="divider">or continue with</div>
-      </StyledForm>
+            <div className="flex items-center justify-end text-dodgerBlue mt-2">
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
+          </div>
 
-      <StyledAuth>
-        <button type="button" className="btn-auth" onClick={handleSubmit}>
-          <Google />
-          Sign in with Google
-        </button>
-      </StyledAuth>
-    </LayoutOne>
+          <StyledButton disabled={loading}>Login</StyledButton>
+
+          <div className="divider">or continue with</div>
+        </StyledForm>
+
+        <StyledAuth>
+          <button type="button" className="btn-auth" onClick={handleSubmit}>
+            <Google />
+            Sign in with Google
+          </button>
+        </StyledAuth>
+      </LayoutOne>
+    </>
   );
 };
 
