@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 
 import {
@@ -10,6 +9,7 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
+  SEO,
 } from '../../components';
 import { Google, Error } from '../../components/icons';
 import { useAuth } from '../../context/AuthContext';
@@ -43,7 +43,7 @@ const Signin = () => {
 
   return (
     <>
-      <Helmet title="Signin - Airspace" />
+      <SEO title="Signin - Airspace" />
       <LayoutOne>
         <Heading>
           <h2>Signin</h2>

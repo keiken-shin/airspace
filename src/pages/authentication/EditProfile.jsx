@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Helmet } from 'react-helmet';
 
 import { useAuth } from '../../context/AuthContext';
-import { Header, StyledAlert } from '../../components';
+import { Header, StyledAlert, SEO } from '../../components';
 import Profile from '../../assets/images/profile.jpg';
 import { Error } from '../../components/icons';
 import { storage } from '../../api/firebase';
@@ -199,7 +198,7 @@ const EditProfile = () => {
 
   return (
     <>
-      <Helmet title="Edit Profile" />
+      <SEO title="Edit Profile" />
       <Header />
       <StyledMain>
         {error && (

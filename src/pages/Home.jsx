@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { useParams, useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { useParams, useLocation, Redirect } from 'react-router-dom';
 
 import {
   AddFile,
   AddFolder,
   BreadCrumbs,
-  Folder,
-  File,
   Header,
+  SEO,
+  AllFolders,
+  AllFiles,
 } from '../components';
 import { useFolder } from '../hooks/useFolder';
 
@@ -36,79 +36,43 @@ const StyledContainer = styled.main`
   }
 `;
 
-const StyledList = styled.div`
-  ${tw`grid`}
-  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-
-  & {
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    }
-
-    @media (max-width: 360px) {
-      grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-    }
-
-    .inner-list-div {
-      ${tw`p-2`}
-    }
-  }
-`;
-
 const Home = () => {
   const { folderId } = useParams();
   const { state = {} } = useLocation();
+
   const { folder, childFolders, childFiles } = useFolder(
     folderId,
     state.folder
   );
 
-  return (
-    <>
-      <Helmet title={folderId ? folder.name : 'Airspace'} />
-      <Header />
-      <StyledContainer>
-        <section className="controls">
-          <div className="breadcrumbs-menu">
-            <BreadCrumbs currentFolder={folder} />
-          </div>
-          <div className="control-buttons">
-            <AddFile currentFolder={folder} />
-            <AddFolder currentFolder={folder} />
-          </div>
-        </section>
-
-        {childFolders.length > 0 && (
-          <section className="folders-section">
-            <h4 className="section-title">Folders</h4>
-            <StyledList>
-              {childFolders.map((childFolder) => (
-                <div className="inner-list-div" key={childFolder.id}>
-                  <Folder folder={childFolder} />
-                </div>
-              ))}
-            </StyledList>
+  try {
+    return (
+      <>
+        <SEO title={folderId ? folder.name : 'Airspace'} />
+        <Header />
+        <StyledContainer>
+          <section className="controls">
+            <div className="breadcrumbs-menu">
+              <BreadCrumbs currentFolder={folder} />
+            </div>
+            <div className="control-buttons">
+              <AddFile currentFolder={folder} />
+              <AddFolder currentFolder={folder} />
+            </div>
           </section>
-        )}
 
-        {childFolders.length > 0 && childFiles.length > 0 && (
-          <hr className="my-4" />
-        )}
+          <AllFolders childFolders={childFolders} />
 
-        {childFiles.length > 0 && (
-          <section className="files-section">
-            <h4 className="section-title">Files</h4>
-            <StyledList>
-              {childFiles.map((childFile) => (
-                <div className="inner-list-div" key={childFile.id}>
-                  <File file={childFile} />
-                </div>
-              ))}
-            </StyledList>
-          </section>
-        )}
-      </StyledContainer>
-    </>
-  );
+          {childFolders.length > 0 && childFiles.length > 0 && (
+            <hr className="my-4" />
+          )}
+
+          <AllFiles childFiles={childFiles} />
+        </StyledContainer>
+      </>
+    );
+  } catch {
+    return <Redirect to="/404" />;
+  }
 };
 export default Home;

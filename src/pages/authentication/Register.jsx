@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link, useHistory } from 'react-router-dom';
 
 import {
@@ -10,6 +9,7 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
+  SEO,
 } from '../../components';
 import { Error, Google } from '../../components/icons';
 import { useAuth } from '../../context/AuthContext';
@@ -62,7 +62,7 @@ const Register = () => {
 
   return (
     <>
-      <Helmet title="Register - Airspace" />
+      <SEO title="Register - Airspace" />
       <LayoutOne>
         <Heading>
           <h2>Register</h2>

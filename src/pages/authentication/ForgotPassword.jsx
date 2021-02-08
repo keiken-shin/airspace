@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
 import {
@@ -9,6 +8,7 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
+  SEO,
 } from '../../components';
 import { Error } from '../../components/icons';
 import { useAuth } from '../../context/AuthContext';
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Helmet title="Reset Password - Airspace" />
+      <SEO title="Reset Password - Airspace" />
       <LayoutOne>
         <Heading>
           <h2>Reset Password</h2>
