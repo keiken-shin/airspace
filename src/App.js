@@ -5,6 +5,7 @@ import GlobalStyle from './assets/styles/global';
 
 import { PrivateRoute } from './components';
 import { AuthProvider } from './context/AuthContext';
+import './assets/styles/styles.css';
 import {
   EditProfile,
   ForgotPassword,
