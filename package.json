@@ -2,11 +2,13 @@
   "name": "airspace",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "https://air-space.netlify.app/",
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^4.0.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
+    "autoprefixer": "^10.2.4",
     "firebase": "^8.2.5",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -15,12 +17,13 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
+    "tailwindcss": "^2.0.2",
     "twin.macro": "^2.2.0",
     "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "build:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/styles.css",
+    "build:css": "set REACT_APP_ENV=production postcss src/assets/styles/tailwind.css -o src/assets/styles/styles.css",
     "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/styles.css",
     "start": "npm run watch:css & react-scripts start",
     "build": "npm run build:css & react-scripts build",
@@ -46,7 +49,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.4",
     "babel-plugin-macros": "^3.0.1",
     "eslint": "^7.19.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -58,8 +60,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.2.4",
     "postcss-cli": "^8.3.1",
-    "prettier": "^2.2.1",
-    "tailwindcss": "^2.0.2"
+    "prettier": "^2.2.1"
   },
   "babelMacros": {
     "twin": {
