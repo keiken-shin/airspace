@@ -6,7 +6,6 @@
 .pnp.js
 .vscode/
 .eslintcache
-/src/assets/styles/styles.css
 
 # testing
 /coverage
