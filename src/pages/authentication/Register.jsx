@@ -26,8 +26,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password.current.value.length)
+    if (password.current.value.length < 6) {
       return setError('Password length should be greater than 6');
+    }
 
     if (password.current.value !== passwordConfirmation.current.value) {
       return setError('Password do not match');
