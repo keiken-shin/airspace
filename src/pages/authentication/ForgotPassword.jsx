@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '../../components';
 
 import {
   Heading,
@@ -8,8 +9,7 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
-  SEO,
-} from '../../components';
+} from '../../components/templates';
 import { Error } from '../../components/icons';
 import { useAuth } from '../../context/AuthContext';
 

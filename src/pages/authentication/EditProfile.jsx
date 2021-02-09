@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 import { useAuth } from '../../context/AuthContext';
-import { Header, StyledAlert, SEO } from '../../components';
+import { Header, SEO } from '../../components';
+import { StyledAlert } from '../../components/templates';
 import Profile from '../../assets/images/profile.jpg';
 import { Error } from '../../components/icons';
 import { storage } from '../../api/firebase';

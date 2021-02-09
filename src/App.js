@@ -9,11 +9,10 @@ import './assets/styles/styles.css';
 import {
   EditProfile,
   ForgotPassword,
-  Home,
-  Notfound,
   Register,
   Signin,
-} from './pages';
+} from './pages/authentication';
+import { Home, Notfound } from './pages';
 
 const App = () => (
   <BrowserRouter>

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import { SEO } from '../../components';
 import {
   Heading,
   StyledForm,
@@ -9,8 +10,7 @@ import {
   StyledAlert,
   Input,
   LayoutOne,
-  SEO,
-} from '../../components';
+} from '../../components/templates';
 import { Google, Error } from '../../components/icons';
 import { useAuth } from '../../context/AuthContext';
 

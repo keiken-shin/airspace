@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, File } from '.';
+import { List } from './templates';
+import File from './File';
 
 const AllFiles = ({ childFiles }) => (
   <>

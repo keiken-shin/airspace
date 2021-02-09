@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, Folder } from '.';
+import { List } from './templates';
+import Folder from './Folder';
 
 const AllFolders = ({ childFolders }) => (
   <>
