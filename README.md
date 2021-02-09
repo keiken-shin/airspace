@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="./src/assets/images/logo.png" width="100" />
+  <img alt="Logo" src="static/logo.png" width="200" />
 </div>
 
 <h1 align="center">
@@ -12,9 +12,7 @@
 
 <p align="center">Below are some screenshots</p>
 
-![demo](static/login.png)
-![demo](static/home.png)
-![demo](static/edit.png)
+![demo](static/Airspace-mockup.png)
 
 ## 🛠 Installation & Set Up
 
