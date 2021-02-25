@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { SEO } from '../../components';
@@ -21,6 +21,15 @@ const Signin = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const isCurrent = useRef(true);
+
+  useEffect(
+    () => () => {
+      // Called when component is going to unmount, preventing memory leak error
+      isCurrent.current = false;
+    },
+    []
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +47,9 @@ const Signin = () => {
       setError('Failed to sign in');
     }
 
-    return setLoading(false);
+    if (isCurrent.current) {
+      setLoading(false);
+    }
   };
 
   return (
