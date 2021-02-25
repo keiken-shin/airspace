@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../../components';
 
@@ -19,6 +19,15 @@ const ForgotPassword = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const isCurrent = useRef(true);
+
+  useEffect(
+    () => () => {
+      // Called when component is going to unmount, preventing memory leak error
+      isCurrent.current = false;
+    },
+    []
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +44,11 @@ const ForgotPassword = () => {
       setError('Failed to reset password');
     }
 
-    return setLoading(false);
+    if (isCurrent.current) {
+      return setLoading(false);
+    }
+
+    return 0;
   };
 
   return (

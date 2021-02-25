@@ -48,8 +48,10 @@ const Signin = () => {
     }
 
     if (isCurrent.current) {
-      setLoading(false);
+      return setLoading(false);
     }
+
+    return 0;
   };
 
   return (

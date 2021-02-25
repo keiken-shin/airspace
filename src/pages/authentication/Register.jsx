@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { SEO } from '../../components';
@@ -22,6 +22,15 @@ const Register = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const isCurrent = useRef(true);
+
+  useEffect(
+    () => () => {
+      // Called when component is going to unmount, preventing memory leak error
+      isCurrent.current = false;
+    },
+    []
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +52,11 @@ const Register = () => {
       setError('Failed to create an account');
     }
 
-    return setLoading(false);
+    if (isCurrent.current) {
+      return setLoading(false);
+    }
+
+    return 0;
   };
 
   const handleGoogleSubmit = async (e) => {
